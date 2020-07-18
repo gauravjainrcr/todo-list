@@ -24,7 +24,11 @@
                 </span>
             </div>
 
-            <div class="card margin" *ngFor="let todo of filteredArray">
+            <div class="no-todos-margin" *ngIf="!todos.length">
+                <h3 class="text-center">Yay..!! No todos left.</h3>
+            </div>
+
+            <div class="card margin" *ngFor="let todo of filteredTodos">
                 <h5 class="card-header header-color">
                     {{todo.title}}
                     <span class="span-padding hover-cursor pull-right" (click)="deleteTodo(todo.id)">

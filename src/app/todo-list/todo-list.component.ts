@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit {
   });
   todos:any = [];
   addOrEdit:boolean = true;
-  filteredArray:any = [];
+  filteredTodos:any = [];
 
   constructor(private todoService: TodoService) { }
 
@@ -28,7 +28,7 @@ export class TodoListComponent implements OnInit {
     this.todoService.getTodos()
       .subscribe(data => {
         this.todos = data;
-        this.filteredArray = data;
+        this.filteredTodos = data;
       })
   }
 
@@ -83,9 +83,11 @@ export class TodoListComponent implements OnInit {
   }
 
   searchTodo = searchText => {
-      this.filteredArray = this.todos.filter(todo => {
+    if(searchText != '') {
+      this.filteredTodos = this.todos.filter(todo => {
         return (todo.text.toLowerCase().includes(searchText.toLowerCase()) || todo.title.toLowerCase().includes(searchText.toLowerCase()))
       })
+    }
   }
 
 }

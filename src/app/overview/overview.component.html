@@ -1,9 +1,11 @@
 <div class="container main-margin">
-
     <h4 class="text-center">Overview of Todo-lists</h4>
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
+            <div class="no-todos-margin border-css" *ngIf="!todos.length">
+                <h3 class="text-center">Yay..!! No todos left.</h3>
+            </div>
             <ul class="list-group" *ngFor="let todo of todos">
                 <li class="list-group-item">{{todo.title}}</li>
             </ul>

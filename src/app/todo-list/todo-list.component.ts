@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TodoService } from '../services/todo.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { TodoService } from '../services/todo.service';
 export class TodoListComponent implements OnInit {
 
   todoForm = new FormGroup({
-    title: new FormControl(''),
-    text: new FormControl(''),
+    title: new FormControl('', [Validators.required]),
+    text: new FormControl('', [Validators.required]),
     id: new FormControl(''),
   });
   todos:any = [];
@@ -33,18 +33,20 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo = () => {
-    const title = this.todoForm.controls['title'].value;
-    const text = this.todoForm.controls['text'].value;
-    const newTodo = {
-      title,
-      text
+    if(this.todoForm.status == "VALID") {
+      const title = this.todoForm.controls['title'].value;
+      const text = this.todoForm.controls['text'].value;
+      const newTodo = {
+        title,
+        text
+      }
+  
+      this.todoService.postTodo(newTodo)
+        .subscribe(res => {
+          this.refreshTodos();
+          this.todoForm.reset();
+        })
     }
-
-    this.todoService.postTodo(newTodo)
-      .subscribe(res => {
-        this.refreshTodos();
-        this.todoForm.reset();
-      })
   }
 
   editTodo = todoId => {

@@ -1,0 +1,20 @@
+.hover-cursor {
+    cursor: pointer;
+    border-radius: 0px
+}
+
+.margin {
+    margin: 1rem 0;
+}
+
+.span-padding {
+    padding: 0px 5px !important;
+}
+
+.main-margin {
+    margin: 3rem 0;
+}
+
+.header-color {
+    background-color: #007bff70 !important;
+}

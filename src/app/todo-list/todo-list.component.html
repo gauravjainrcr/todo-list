@@ -1,0 +1,36 @@
+<div class="container main-margin">
+
+    <h4 class="text-center">Detailed Todo-lists</h4>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form [formGroup]="todoForm">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Add Title" formControlName="title">
+                    <input type="text" class="form-control" placeholder="Add Text" formControlName="text">
+                    <span *ngIf="addOrEdit" class="input-group-text hover-cursor" (click)="addTodo()">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </span>
+                    <span *ngIf="!addOrEdit" class="input-group-text hover-cursor" (click)="updateTodo()">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </form>
+
+            <div class="card margin" *ngFor="let todo of todos">
+                <h5 class="card-header header-color">
+                    {{todo.title}}
+                    <span class="span-padding hover-cursor pull-right" (click)="deleteTodo(todo.id)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </span>
+                    <span class="span-padding hover-cursor pull-right" (click)="editTodo(todo.id)">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </span>
+                </h5>
+                <div class="card-body">
+                    <p class="card-text">{{todo.text}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

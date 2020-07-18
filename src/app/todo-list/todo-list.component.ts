@@ -16,6 +16,7 @@ export class TodoListComponent implements OnInit {
   });
   todos:any = [];
   addOrEdit:boolean = true;
+  filteredArray:any = [];
 
   constructor(private todoService: TodoService) { }
 
@@ -27,6 +28,7 @@ export class TodoListComponent implements OnInit {
     this.todoService.getTodos()
       .subscribe(data => {
         this.todos = data;
+        this.filteredArray = data;
       })
   }
 
@@ -77,6 +79,12 @@ export class TodoListComponent implements OnInit {
     this.todoService.deleteTodo(id)
       .subscribe(res => {
         this.refreshTodos();
+      })
+  }
+
+  searchTodo = searchText => {
+      this.filteredArray = this.todos.filter(todo => {
+        return (todo.text.toLowerCase().includes(searchText.toLowerCase()) || todo.title.toLowerCase().includes(searchText.toLowerCase()))
       })
   }
 

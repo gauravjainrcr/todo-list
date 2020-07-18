@@ -17,7 +17,14 @@
                 </div>
             </form>
 
-            <div class="card margin" *ngFor="let todo of todos">
+            <div class="input-group search-field-margin">
+                <input type="text" class="form-control" placeholder="Search in Title or Text..." (input)="searchTodo($event.target.value)">
+                <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+
+            <div class="card margin" *ngFor="let todo of filteredArray">
                 <h5 class="card-header header-color">
                     {{todo.title}}
                     <span class="span-padding hover-cursor pull-right" (click)="deleteTodo(todo.id)">
